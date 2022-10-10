@@ -9,7 +9,7 @@ namespace Brackets
             char openingSymbol = '(';
             char closingSymbol = ')';
             string line;
-            string message = "Некорректное скобочное выражение";
+            string message = "корректное скобочное выражение";
                         
             int depth = 0;
             int maxDepth = 0;
@@ -41,11 +41,11 @@ namespace Brackets
 
             if (depth == 0)
             {
-                Console.WriteLine($"Корректное скобочное выражение, глубина вложений {maxDepth}");
+                Console.WriteLine($"{message}, глубина вложений {maxDepth}");
             }
             else
             {
-                Console.WriteLine($"{message}");
+                Console.WriteLine($"Не{message}");
             }
         }
     }
