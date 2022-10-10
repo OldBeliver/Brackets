@@ -9,50 +9,43 @@ namespace Brackets
             char openingSymbol = '(';
             char closingSymbol = ')';
             string line;
-            string message = "Некорректное скобочное выражение";            
+            string message = "Некорректное скобочное выражение";
+                        
+            int depth = 0;
+            int maxDepth = 0;
 
-            while (true)
+            Console.WriteLine($"Введите строку с {openingSymbol}{closingSymbol} скобками:");
+            line = Console.ReadLine();
+
+            for (int i = 0; i < line.Length; i++)
             {
-                int balance = 0;
-                int depth = 0;
-                int maxDepth = 0;
-
-                Console.WriteLine($"Введите строку с {openingSymbol}{closingSymbol} скобками:");
-                line = Console.ReadLine();
-
-                for (int i = 0; i < line.Length; i++)
+                if (line[i] == openingSymbol)
                 {
-                    if (line[i] == openingSymbol)
-                    {
-                        balance++;
-                        depth++;
-                    }
-
-                    if (line[i] == closingSymbol)
-                    {
-                        balance--;
-                        depth--;
-                    }
-
-                    if (balance < 0)
-                    {                        
-                        i = line.Length;
-                    }
-
-                    if (depth > maxDepth)
-                    {
-                        maxDepth = depth;
-                    }
+                    depth++;                    
+                }
+                else if (line[i] == closingSymbol)
+                {
+                    depth--;                    
                 }
 
-                if (balance == 0)
-                {
-                    Console.WriteLine($"Корректное скобочное выражение, глубина вложений {maxDepth}");
+                if (depth < 0)
+                {                    
+                    break;
                 }
-                else
+
+                if (depth > maxDepth)
                 {
-                    Console.WriteLine($"{message}");
+                    maxDepth = depth;
                 }
+            }
+
+            if (depth == 0)
+            {
+                Console.WriteLine($"Корректное скобочное выражение, глубина вложений {maxDepth}");
+            }
+            else
+            {
+                Console.WriteLine($"{message}");
             }
         }
     }
